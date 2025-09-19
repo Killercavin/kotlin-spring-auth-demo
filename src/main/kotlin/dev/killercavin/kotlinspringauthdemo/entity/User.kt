@@ -1,9 +1,12 @@
 package dev.killercavin.kotlinspringauthdemo.entity
 
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Table
 import jakarta.validation.constraints.NotBlank
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
@@ -11,6 +14,7 @@ import java.time.Instant
 import java.util.*
 
 @Entity
+@Table(name = "users")
 data class User(
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null,
@@ -27,7 +31,7 @@ data class User(
     @field:NotBlank(message = "Password is required")
     var hashedPassword: String,
 
-    @field:NotBlank(message = "Role is required")
+    @Enumerated(EnumType.STRING)
     val role: Role = Role.USER,
 
     @CreationTimestamp
