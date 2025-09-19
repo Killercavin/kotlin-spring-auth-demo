@@ -1,6 +1,5 @@
 package dev.killercavin.kotlinspringauthdemo.entity
 
-import dev.killercavin.kotlinspringauthdemo.entity.Role
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -9,7 +8,7 @@ import jakarta.validation.constraints.NotBlank
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.Instant
-import java.util.UUID
+import java.util.*
 
 @Entity
 data class User(
@@ -17,7 +16,10 @@ data class User(
     val id: UUID? = null,
 
     @field:NotBlank(message = "Name is required")
-    var name: String,
+    var fullName: String,
+
+    @field:NotBlank(message = "Username is required")
+    val username: String,
 
     @field:NotBlank(message = "Email is required")
     var email: String,
