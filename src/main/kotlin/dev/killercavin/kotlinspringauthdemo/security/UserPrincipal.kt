@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails
 class UserPrincipal(private val user: User): UserDetails {
     override fun getUsername() = user.username
     override fun getPassword() = user.hashedPassword
-    override fun getAuthorities(): Collection<GrantedAuthority?> = listOf(SimpleGrantedAuthority("ROLE_${user.role}"))
+    override fun getAuthorities(): Collection<GrantedAuthority> = listOf(SimpleGrantedAuthority("ROLE_${user.role}"))
     override fun isAccountNonExpired() = true
     override fun isAccountNonLocked() = true
     override fun isCredentialsNonExpired() = true
