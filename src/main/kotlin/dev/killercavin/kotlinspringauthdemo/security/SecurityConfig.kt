@@ -23,7 +23,7 @@ class SecurityConfig {
     @Bean
     fun securityFilterChain(httpSecurity: HttpSecurity): SecurityFilterChain {
         httpSecurity
-            .csrf { it.disable() }
+            // CSRF protection is enabled by default. If you use JWT tokens and do not use session-based authentication, you may disable CSRF, but be sure to document the reason.
             .authorizeHttpRequests {
                 it.requestMatchers("/api/auth/**").permitAll()
                 it.requestMatchers("/admin/**").hasRole("ADMIN")
