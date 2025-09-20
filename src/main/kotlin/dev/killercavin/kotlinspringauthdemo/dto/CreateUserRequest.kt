@@ -19,7 +19,7 @@ fun CreateUserRequest.toEntity(passwordEncoder: PasswordEncoder): User {
         fullName = this.fullName,
         username = this.username,
         email = this.email,
-        hashedPassword = passwordEncoder.encode(this.password),
+        hashedPassword = passwordEncoder.encode(password),
         role = this.role ?: Role.USER,
     )
 }
