@@ -7,4 +7,7 @@ import java.util.UUID
 interface UserRepository: CrudRepository<User, UUID> {
     fun findUserByUsername(username: String): User?
     fun findUserByEmail(email: String): User?
+
+    fun existsUserByEmail(email: String): Boolean
+    fun existsUserByUsername(username: String): Boolean
 }
