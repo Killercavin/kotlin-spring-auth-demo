@@ -5,6 +5,7 @@ import dev.killercavin.kotlinspringauthdemo.dto.UserLoginRequest
 import dev.killercavin.kotlinspringauthdemo.dto.UserResponse
 import dev.killercavin.kotlinspringauthdemo.dto.toEntity
 import dev.killercavin.kotlinspringauthdemo.dto.toResponseDTO
+import dev.killercavin.kotlinspringauthdemo.exception.ResourceConflictException
 import dev.killercavin.kotlinspringauthdemo.repository.UserRepository
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.BadCredentialsException
@@ -20,6 +21,15 @@ class AuthService(
     private val authenticationManager: AuthenticationManager
 ) {
     fun register(request: CreateUserRequest): UserResponse {
+
+        if (userRepository.existsUserByEmail(request.email)) {
+            throw ResourceConflictException("Email already exists")
+        }
+
+        if (userRepository.existsUserByUsername(request.username)) {
+            throw ResourceConflictException("Username already exists")
+        }
+
         val requestEntity = request.toEntity(passwordEncoder)
         val newUser = userRepository.save(requestEntity)
 
